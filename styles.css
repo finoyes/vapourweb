@@ -101,6 +101,15 @@ body.no-bloom pre {
   animation: none;
 }
 
+body.no-bloom pre a,
+body.no-bloom pre a:hover,
+body.no-bloom pre a:focus-visible {
+  border-bottom: none;
+  background: transparent;
+  text-decoration: none;
+  pointer-events: none;
+}
+
 pre a {
   color: inherit;
   text-decoration: none;

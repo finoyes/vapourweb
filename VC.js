@@ -25,7 +25,9 @@ let _ = {
             t.char === e.char &&
             t.weight === e.weight &&
             t.color === e.color &&
-            t.background === e.background)(a, f) ||
+            t.background === e.background &&
+            t.l === e.l &&
+            t.u === e.u)(a, f) ||
             ((e = !0), (d[r] = { ...a }));
         }
         if (0 != e) {
@@ -1140,12 +1142,10 @@ var xt = Object.freeze({
   },
   _: function (a, t, e, r) {
     if ("screensaver" != r.mode) {
-      var o = a.m,
-        n = [];
+      var o = a.m;
       let r = 0;
       var i,
-        l,
-        f = wt.$("--display-mode");
+        l;
       for (i of bt) {
         var s,
           u = [],
@@ -1204,13 +1204,7 @@ var xt = Object.freeze({
             for (y of p.H) ((y.first.l = s.l), (y.I.u = s.u));
             ((t = p.offset.J + 1), (e = p.offset.L), (r = w(r, m.K)));
           }
-        n.push({ x: c, y: h, ut: f, width: d });
       }
-      for (l of n)
-        "rows" == l.ut
-          ? X({ char: "─" }, l.x, l.y - 1, l.width, 1, E.data, a.cols, a.rows)
-          : "cols" == l.ut &&
-            X({ char: "│" }, l.x - 1, 0, 1, r, E.data, a.cols, a.rows);
       for (let t = 0; t < e.length; t++) {
         var g = E.data[t];
         g.char &&
