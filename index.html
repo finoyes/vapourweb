@@ -7,7 +7,23 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    
+    <button id="fx-toggle" class="ui-toggle" type="button" aria-pressed="false">
+      Hide Text + Bloom
+    </button>
+
+    <main aria-hidden="true">
+      <div>
+        According to Wikipedia, a vapour chamber is a flat heat-spreading device and a special form of heat pipe. It is commonly used to move heat away from small hot components and distribute that heat over a larger surface.
+      </div>
+      <div>
+        Inside a sealed chamber, a small amount of working fluid evaporates at the hot region, then condenses at cooler regions and returns by capillary action.
+        <br />
+        This evaporation-condensation cycle enables fast, efficient thermal transport across the plate.
+        <br />
+        Source:
+        <a href="https://en.wikipedia.org/wiki/Vapor_chamber" target="_blank" rel="noopener noreferrer">Wikipedia - Vapor chamber</a>
+      </div>
+    </main>
 
     <pre id="screen" role="img" aria-label="Animated ASCII interface"></pre>
 
@@ -18,7 +34,24 @@
     <script type="module">
       import { boot } from "./VC.js";
 
-      boot({ mode: "site", color: "#f2f7ff" });
+      boot({ mode: "site", color: "#f2f7ff", weight: "700" });
+
+      const toggleButton = document.getElementById("fx-toggle");
+      const sourceBlocks = Array.from(document.querySelectorAll("main > div"));
+      const sourceMarkup = sourceBlocks.map((block) => block.innerHTML);
+      let muted = false;
+
+      toggleButton?.addEventListener("click", () => {
+        muted = !muted;
+        document.body.classList.toggle("no-bloom", muted);
+
+        sourceBlocks.forEach((block, index) => {
+          block.innerHTML = muted ? "" : sourceMarkup[index];
+        });
+
+        toggleButton.textContent = muted ? "Show Text + Bloom" : "Hide Text + Bloom";
+        toggleButton.setAttribute("aria-pressed", String(muted));
+      });
     </script>
   </body>
 </html>
